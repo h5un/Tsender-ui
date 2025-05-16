@@ -7,4 +7,4 @@
 
 3. Implement `airdropERC20` function ✅
 4. E2E Testing ✅
-5. Deploy to fleek
+5. Deploy to vercel 

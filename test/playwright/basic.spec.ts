@@ -24,13 +24,22 @@ test('shows airdrop form', async ({ page, context, metamaskPage, extensionId }) 
   await page.getByTestId('rk-wallet-option-io.metamask').waitFor({ state: 'visible' }, { timeout: 30000 });
   await page.getByTestId('rk-wallet-option-io.metamask').click();
   await metamask.connectToDapp();
+  
+  const customNetwork = {
+    name: 'Anvil',
+    rpcUrl: 'http://127.0.0.1:8545',
+    chainId: 31337,
+    symbol: 'ETH'
+  }
+  await metamask.addNetwork(customNetwork)
+  
+  await page.goto('/');
 
-  // await metamaskPage.getByRole('button', { name: 'Approve' }).waitFor({ state: 'visible' });
-  // await metamaskPage.getByRole('button', { name: 'Approve' }).click();
+  await page.getByRole('textbox', { name: '0x', exact: true }).waitFor({
+    state: 'visible',
+    timeout: 30000
+  });
 
-  // await metamaskPage.getByRole('button', { name: 'Switch network' }).waitFor({ state: 'visible' });
-  // await metamaskPage.getByRole('button', { name: 'Switch network' }).click();
-
-  // await expect(page.getByText("Token Address")).toBeVisible();
+  await expect(page.getByText("Token Address")).toBeVisible();
 
 });
